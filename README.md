@@ -1,4 +1,4 @@
-# Project Name: 
+# Project Name: Space Adventures
 
 * Description: The project is an interactive comic website that tells the story of three astronauts who were killed by a shape-shifting dog sent by an evil mastermind. The overall concept and theme of the project is a sci-fi mystery with elements of suspense. The use of a shape-shifting dog as the antagonist adds an extra layer of intrigue and unpredictability to the story. The project's interactivity, which includes sounds, dialogue, and animation, further enhances the immersive experience. We were striving to create an engaging and captivating experience for the user. The use of plot twists and unexpected events is intended to keep the user interested and invested in the story. 
 
