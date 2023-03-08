@@ -1,12 +1,18 @@
+// Get all the panels on the page
 const panels = document.querySelectorAll('.panel');
 
+// Set the active panel based on scroll position
 function setActivePanel() {
+  // Get the current scroll position
   const scrollPosition = window.scrollY;
 
+  // Loop through each panel
   panels.forEach((panel) => {
+    // Get the top and bottom positions of the panel
     const panelTop = panel.offsetTop;
     const panelBottom = panelTop + panel.offsetHeight;
 
+    // If the scroll position is within the panel, add the 'active' class
     if (scrollPosition >= panelTop && scrollPosition < panelBottom) {
       panel.classList.add('active');
 
@@ -14,47 +20,44 @@ function setActivePanel() {
       const activeImage = panel.querySelector('img');
       if (activeImage) {
         // Create an Audio object and set its source to the src attribute of the image
-        const audio = new Audio(activeImage.src);
-        // Play the audio
-        audio.play();
+        const firstImage = panel.querySelector('img');
+        if (!firstImage.dataset.played) {
+        const sound = new Audio(firstImage.dataset.sound);
+        sound.play();
+        firstImage.dataset.played = true;
+      }
       }
     } else {
+      // If the scroll position is outside the panel, remove the 'active' class
       panel.classList.remove('active');
-
-      // Pause the audio when the panel is inactive
-      const audio = panel.querySelector('audio');
-      if (audio) {
-        audio.pause();
-      }
     }
   });
 }
 
-
-
-
-//animate the scrolling between the panels
+// Function to animate scrolling between panels
 function scrollToNextPanel(event) {
+  // Prevent the default behavior of clicking on an image
   event.preventDefault();
 
+  // Find the current panel and the next panel
   const currentPanel = event.currentTarget.closest('.panel');
   const nextPanel = currentPanel.nextElementSibling;
 
+  // If there is a next panel, scroll to it
   if (nextPanel) {
     nextPanel.scrollIntoView({ behavior: 'smooth' });
   }
 }
 
+// Loop through each panel and add a click event listener to its images
 panels.forEach((panel) => {
   const images = panel.querySelectorAll('img');
-
   images.forEach((image) => {
     image.addEventListener('click', scrollToNextPanel);
   });
 });
 
-
-// Randomly change color of header text
+// Randomly change the color of the header text every second
 const headerText = document.querySelector('.header');
 const colors = ['#FF7F50', '#DC143C', '#00CED1', '#FFD700', '#8B008B'];
 setInterval(() => {
@@ -62,7 +65,7 @@ setInterval(() => {
   headerText.style.color = randomColor;
 }, 1000);
 
-// Add bouncy text effect to header
+// Add a bouncy text effect to each word in the header
 const words = headerText.innerText.split(' ');
 headerText.innerHTML = words.map(word => `<span>${word}</span>`).join(' ');
 const spans = document.querySelectorAll('.header span');
@@ -75,7 +78,7 @@ spans.forEach(span => {
   });
 });
 
-//remove the arrow when you get to the end of the webpage
+// Remove the arrow when the user reaches the bottom of the page
 $(document).ready(function() {
 
   // Add a click event listener to the arrow
